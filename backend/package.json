@@ -7,6 +7,16 @@
   "scripts": {
     "start": "nodemon server.js"
   },
+  "eslintConfig": {
+    "rules": {
+      "import/extensions": [
+        "error",
+        {
+          "js": "ignorePackages"
+        }
+      ]
+    }
+  },
   "keywords": [],
   "author": "Jen Perez",
   "license": "MIT",
@@ -29,3 +39,4 @@
     "nodemon": "^2.0.16"
   }
 }
+

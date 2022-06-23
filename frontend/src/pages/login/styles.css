@@ -10,7 +10,10 @@
 .login_1 {
     width: 300px;
     margin: 0 auto;
+    align-items: center;
 }
+
+
 .login_1 span {
     font-size: 20px;
 }

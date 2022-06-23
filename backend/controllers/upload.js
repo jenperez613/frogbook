@@ -8,7 +8,7 @@ cloudinary.config({
     api_key: process.env.CLOUD_API_KEY,
     api_secret: process.env.CLOUD_API_SECRET,
 });
-const uploadImages = async (req, res) => {
+export const uploadImages = async (req, res) => {
     try {
         const { path } = req.body;
         let files = Object.values(req.files).flat();
@@ -23,7 +23,7 @@ const uploadImages = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 };
-const listImages = async (req, res) => {
+ export const listImages = async (req, res) => {
     const { path, sort, max } = req.body;
 
     cloudinary.v2.search
@@ -65,4 +65,3 @@ const removeTmp = (path) => {
     });
 };
 
-export {uploadImages, listImages}

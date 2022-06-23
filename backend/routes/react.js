@@ -1,6 +1,6 @@
 import express from "express";
-import { reactPost, getReacts } from "../controllers/react";
-import { authUser } from "../middleware/auth";
+import { reactPost, getReacts } from "../controllers/react.js";
+import { authUser } from "../middleware/auth.js";
 
 const router = express.Router();
 router.put("/reactPost", authUser, reactPost);

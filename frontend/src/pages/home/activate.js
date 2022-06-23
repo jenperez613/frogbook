@@ -26,6 +26,8 @@ export default function Activate() {
     useEffect(() => {
         activateAccount();
     }, []);
+
+
     const activateAccount = async () => {
         try {
             setLoading(true);

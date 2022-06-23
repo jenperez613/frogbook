@@ -24,6 +24,7 @@ function App() {
     useEffect(() => {
         getAllPosts();
     }, []);
+
     const getAllPosts = async () => {
         try {
             dispatch({
@@ -42,12 +43,15 @@ function App() {
                 payload: data,
             });
         } catch (error) {
+            if (error.response && error.response.data){
             dispatch({
                 type: "POSTS_ERROR",
                 payload: error.response.data.message,
             });
-        }
+        }}
     };
+    console.log(posts)
+
     return (
         <div className="dark">
             {visible && (

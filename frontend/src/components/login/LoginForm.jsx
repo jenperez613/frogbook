@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import LoginInput from "../inputs/loginInput/LoginInput";
 import { useState } from "react";
+import '../../pages/login/styles.css'
 
 const loginInfo = {
     email: "",
@@ -25,7 +26,7 @@ export default function LoginForm() {
     return (
         <div className="login_wrap">
             <div className="login_1">
-                <img src="https://www.dropbox.com/s/krh2x4dgrto2m8g/frog.svg?raw=1" alt="fb logo"/>
+                <img src="https://www.dropbox.com/s/pm7iq4eiv0y5baj/froglogotransparent.png?raw=1" alt="fb logo"/>
                 <span>frogBook helps you connect & share with the amphibians in your life. </span>
             </div>
             <div className="login_2">

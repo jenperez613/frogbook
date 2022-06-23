@@ -6,7 +6,6 @@ import  {
     register,
     activateAccount,
     login,
-    auth,
     sendVerification,
     findUser,
     sendResetPasswordCode,
@@ -40,6 +39,7 @@ router.post("/login", login);
 router.post("/sendVerification", authUser, sendVerification);
 router.post("/findUser", findUser);
 router.post("/sendResetPasswordCode", sendResetPasswordCode);
+router.post("/forgot", sendResetPasswordCode);
 router.post("/validateResetCode", validateResetCode);
 router.post("/changePassword", changePassword);
 router.get("/getProfile/:username", authUser, getProfile);

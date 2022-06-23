@@ -90,7 +90,7 @@ export const register = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.activateAccount = async (req, res) => {
+export const activateAccount = async (req, res) => {
         try {
                 const validUser = req.user.id;
                 const { token } = req.body;
@@ -102,7 +102,7 @@ exports.activateAccount = async (req, res) => {
                                 message: "You don't have the authorization to complete this operation.",
                         });
                 }
-                if (check.verified == true) {
+                if (check.verified === true) {
                         return res
                             .status(400)
                             .json({ message: "This email is already activated." });
@@ -116,7 +116,7 @@ exports.activateAccount = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
         try {
                 const { email, password } = req.body;
                 const user = await User.findOne({ email });
@@ -146,7 +146,7 @@ exports.login = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.sendVerification = async (req, res) => {
+export const sendVerification = async (req, res) => {
         try {
                 const id = req.user.id;
                 const user = await User.findById(id);
@@ -168,7 +168,7 @@ exports.sendVerification = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.findUser = async (req, res) => {
+export const findUser = async (req, res) => {
         try {
                 const { email } = req.body;
                 const user = await User.findOne({ email }).select("-password");
@@ -186,7 +186,7 @@ exports.findUser = async (req, res) => {
         }
 };
 
-exports.sendResetPasswordCode = async (req, res) => {
+export const sendResetPasswordCode = async (req, res) => {
         try {
                 const { email } = req.body;
                 const user = await User.findOne({ email }).select("-password");
@@ -205,7 +205,7 @@ exports.sendResetPasswordCode = async (req, res) => {
         }
 };
 
-exports.validateResetCode = async (req, res) => {
+export const validateResetCode = async (req, res) => {
         try {
                 const { email, code } = req.body;
                 const user = await User.findOne({ email });
@@ -221,7 +221,7 @@ exports.validateResetCode = async (req, res) => {
         }
 };
 
-exports.changePassword = async (req, res) => {
+export const changePassword = async (req, res) => {
         const { email, password } = req.body;
 
         const cryptedPassword = await bcrypt.hash(password, 12);
@@ -234,7 +234,7 @@ exports.changePassword = async (req, res) => {
         return res.status(200).json({ message: "ok" });
 };
 
-exports.getProfile = async (req, res) => {
+export const getProfile = async (req, res) => {
         try {
                 const { username } = req.params;
                 const user = await User.findById(req.user.id);
@@ -279,7 +279,7 @@ exports.getProfile = async (req, res) => {
         }
 };
 
-exports.updateProfilePicture = async (req, res) => {
+export const updateProfilePicture = async (req, res) => {
         try {
                 const { url } = req.body;
 
@@ -292,7 +292,7 @@ exports.updateProfilePicture = async (req, res) => {
         }
 };
 
-exports.updateCover = async (req, res) => {
+export const updateCover = async (req, res) => {
         try {
                 const { url } = req.body;
 
@@ -305,7 +305,7 @@ exports.updateCover = async (req, res) => {
         }
 };
 
-exports.updateDetails = async (req, res) => {
+export const updateDetails = async (req, res) => {
         try {
                 const { infos } = req.body;
 
@@ -323,7 +323,7 @@ exports.updateDetails = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.addFriend = async (req, res) => {
+export const addFriend = async (req, res) => {
         try {
                 if (req.user.id !== req.params.id) {
                         const sender = await User.findById(req.user.id);
@@ -354,7 +354,7 @@ exports.addFriend = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.cancelRequest = async (req, res) => {
+export const cancelRequest = async (req, res) => {
         try {
                 if (req.user.id !== req.params.id) {
                         const sender = await User.findById(req.user.id);
@@ -385,7 +385,7 @@ exports.cancelRequest = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.follow = async (req, res) => {
+export const follow = async (req, res) => {
         try {
                 if (req.user.id !== req.params.id) {
                         const sender = await User.findById(req.user.id);
@@ -412,7 +412,7 @@ exports.follow = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.unfollow = async (req, res) => {
+export const unfollow = async (req, res) => {
         try {
                 if (req.user.id !== req.params.id) {
                         const sender = await User.findById(req.user.id);
@@ -439,7 +439,7 @@ exports.unfollow = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.acceptRequest = async (req, res) => {
+export const acceptRequest = async (req, res) => {
         try {
                 if (req.user.id !== req.params.id) {
                         const receiver = await User.findById(req.user.id);
@@ -467,7 +467,7 @@ exports.acceptRequest = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.unfriend = async (req, res) => {
+export const unfriend = async (req, res) => {
         try {
                 if (req.user.id !== req.params.id) {
                         const sender = await User.findById(req.user.id);
@@ -502,7 +502,7 @@ exports.unfriend = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.deleteRequest = async (req, res) => {
+export const deleteRequest = async (req, res) => {
         try {
                 if (req.user.id !== req.params.id) {
                         const receiver = await User.findById(req.user.id);
@@ -532,7 +532,7 @@ exports.deleteRequest = async (req, res) => {
         }
 };
 
-exports.search = async (req, res) => {
+export const search = async (req, res) => {
         try {
                 const searchTerm = req.params.searchTerm;
                 const results = await User.find({ $text: { $search: searchTerm } }).select(
@@ -543,7 +543,7 @@ exports.search = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.addToSearchHistory = async (req, res) => {
+export const addToSearchHistory = async (req, res) => {
         try {
                 const { searchUser } = req.body;
                 const search = {
@@ -573,7 +573,7 @@ exports.addToSearchHistory = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.getSearchHistory = async (req, res) => {
+export const getSearchHistory = async (req, res) => {
         try {
                 const results = await User.findById(req.user.id)
                     .select("search")
@@ -583,7 +583,7 @@ exports.getSearchHistory = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.removeFromSearch = async (req, res) => {
+export const removeFromSearch = async (req, res) => {
         try {
                 const { searchUser } = req.body;
                 await User.updateOne(
@@ -596,7 +596,7 @@ exports.removeFromSearch = async (req, res) => {
                 res.status(500).json({ message: error.message });
         }
 };
-exports.getFriendsPageInfos = async (req, res) => {
+export const getFriendsPageInfos = async (req, res) => {
         try {
                 const user = await User.findById(req.user.id)
                     .select("friends requests")

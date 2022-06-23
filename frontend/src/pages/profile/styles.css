@@ -25,7 +25,7 @@
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
-.update_cover_wrapper {
+.udpate_cover_wrapper {
     position: absolute;
     bottom: 1rem;
     right: 1rem;
@@ -74,6 +74,7 @@
     justify-content: space-between;
     padding: 0 1rem;
     margin-bottom: -2.8rem;
+    z-index: 1;
 }
 .profile_w_left {
     display: flex;
@@ -89,9 +90,8 @@
     height: 180px;
     transform: translateY(-3.6rem);
     border-radius: 50%;
-    background-repeat: no-repeat;
     border: 2px solid #fff;
-    background: #fff;
+    background: #fff no-repeat;
     cursor: pointer;
 }
 .profile_w_bg:hover {
@@ -181,27 +181,27 @@
 .bottom_container {
     padding: 10px 2.2rem;
 }
-.pplYouMayKnow_list {
+.pplumayknow_list {
     display: flex;
     gap: 5px;
     align-items: center;
     height: 240px;
 }
-.pplYouMayKnow {
+.pplumayknow {
     width: 100%;
     height: 100%;
     border-radius: 10px;
     border: 3px solid var(--blue-color);
     padding: 10px 15px;
 }
-.pplYouMayKnow_header {
+.pplumayknow_header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-weight: 600;
     font-size: 16px;
 }
-.addFriendCard {
+.addfriendCard {
     position: relative;
     height: 100%;
     width: 150px;
@@ -209,7 +209,7 @@
     overflow: hidden;
     background: var(--bg-primary);
 }
-.addFriend_imgsmall {
+.addfriend_imgsmall {
     width: 100%;
     height: 140px;
 }
@@ -350,17 +350,17 @@
 .profile_friend_imgs img:hover {
     filter: brightness(110%);
 }
-.cover_crooper {
+.cover_cropper {
     height: 100%;
 }
-.cover_crooper img {
+.cover_cropper img {
     object-fit: cover;
     width: 100%;
 }
 .friends_menu_wrap {
     position: relative;
 }
-.cover_crooper .reactEasyCrop_Container {
+.cover_cropper .reactEasyCrop_Container {
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
 }
@@ -474,6 +474,9 @@
         justify-content: center;
         transform: translateY(-10px);
     }
+    .fix1 {
+        transform: translate(1.2rem, -10px);
+    }
 }
 @media (max-width: 650px) {
     .profile_menu_wrap {
@@ -481,7 +484,7 @@
     }
 }
 @media (max-width: 510px) {
-    .udpate_cover_wrapper {
+    .update_cover_wrapper {
         bottom: 3rem;
     }
 }
@@ -490,6 +493,7 @@
         flex-direction: column;
     }
 }
+
 .scrollFixed .profile_left {
     position: fixed;
     width: 360px;
@@ -517,4 +521,17 @@
     .friendship {
         transform: translateX(-2rem);
     }
+}
+.fix {
+    flex-direction: row !important;
+}
+.react-loading-skeleton {
+    --base-color: #ccc !important;
+    --highlight-color: #ddd !important;
+}
+.skeleton_loader {
+    height: 100px;
+    width: 100%;
+    display: grid;
+    place-items: center;
 }

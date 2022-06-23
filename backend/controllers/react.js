@@ -1,5 +1,5 @@
-import React from "../models/React";
-import User from "../models/User";
+import React from "../models/React.js";
+import User from "../models/User.js";
 import mongoose from "mongoose";
 
 
@@ -31,7 +31,7 @@ export const reactPost = async (req, res) => {
     }
 };
 
-exports.getReacts = async (req, res) => {
+export const getReacts = async (req, res) => {
     try {
         const reactsArray = await React.find({ postRef: req.params.id });
 

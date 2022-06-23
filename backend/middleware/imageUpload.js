@@ -1,7 +1,7 @@
 import fs from 'fs'
 
 
-const imageUpload = (req, res, next) => {
+ export const imageUpload = (req, res, next) => {
     try {
         if (!req.files || Object.values(req.files).flat().length === 0) {
             return res.status(400).json({ message: "No files selected." });
@@ -34,5 +34,5 @@ const removeTmp = (path) => {
     });
 };
 
-export default imageUpload()
+
 

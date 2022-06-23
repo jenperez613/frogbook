@@ -27,7 +27,7 @@ const Home = ({ setVisible, posts, loading, getAllPosts }) => {
                 <Stories />
                 {user.verified === false && <SendVerification user={user} />}
                 <CreatePost user={user} setVisible={setVisible} />
-                <div className="posts">
+                <div className="post">
                     {posts.map((post) => (
                         <Post key={post._id} post={post} user={user} />
                     ))}

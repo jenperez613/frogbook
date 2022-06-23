@@ -1,26 +1,114 @@
-import {Route, Routes} from 'react-router-dom'
-
-import './index.css';
+import { Routes, Route } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
-import {Home} from "./svg";
+import Home from "./pages/home/Home";
+import LoggedInRoutes from "./routes/LoggedInRoutes";
+import NotLoggedInRoutes from "./routes/NotLoggedinRoutes";
+import { useSelector } from "react-redux";
+import Activate from "./pages/home/activate";
+import Reset from "./pages/reset/Reset";
+import CreatePostPopup from "./components/createPostPopup/CreatePostPopup";
+import { useEffect, useReducer, useState } from "react";
+import axios from "axios";
+import { postsReducer } from "./functions/reducers";
+import Friends from "./pages/friends/Friends";
 
 function App() {
-    const get=async()=> {
-        const res = await fetch('http://localhost:3000')
-        console.log(res)
-    }
-    get();
-
-  return (
-    <div className="App">
-        <Routes>
-            <Route path="/login" element={<Login/>}/>
-            <Route path='/profile' element={<Profile/>}/>
-            <Route path="/" element={<Home/>}/>
-        </Routes>
-    </div>
-  );
+    const [visible, setVisible] = useState(false);
+    const { user } = useSelector((state) => ({ ...state }));
+    const [{ loading, error, posts }, dispatch] = useReducer(postsReducer, {
+        loading: false,
+        posts: [],
+        error: "",
+    });
+    useEffect(() => {
+        getAllPosts();
+    }, []);
+    const getAllPosts = async () => {
+        try {
+            dispatch({
+                type: "POSTS_REQUEST",
+            });
+            const { data } = await axios.get(
+                `${process.env.REACT_APP_BACKEND_URL}/getAllPosts`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                    },
+                }
+            );
+            dispatch({
+                type: "POSTS_SUCCESS",
+                payload: data,
+            });
+        } catch (error) {
+            dispatch({
+                type: "POSTS_ERROR",
+                payload: error.response.data.message,
+            });
+        }
+    };
+    return (
+        <div className="dark">
+            {visible && (
+                <CreatePostPopup
+                    user={user}
+                    setVisible={setVisible}
+                    posts={posts}
+                    dispatch={dispatch}
+                />
+            )}
+            <Routes>
+                <Route element={<LoggedInRoutes />}>
+                    <Route
+                        path="/profile"
+                        element={
+                            <Profile setVisible={setVisible} getAllPosts={getAllPosts} />
+                        }
+                        exact
+                    />
+                    <Route
+                        path="/profile/:userName"
+                        element={
+                            <Profile setVisible={setVisible} getAllPosts={getAllPosts} />
+                        }
+                        exact
+                    />
+                    <Route
+                        path="/friends"
+                        element={
+                            <Friends setVisible={setVisible} getAllPosts={getAllPosts} />
+                        }
+                        exact
+                    />
+                    <Route
+                        path="/friends/:type"
+                        element={
+                            <Friends setVisible={setVisible} getAllPosts={getAllPosts} />
+                        }
+                        exact
+                    />
+                    <Route
+                        path="/"
+                        element={
+                            <Home
+                                setVisible={setVisible}
+                                posts={posts}
+                                loading={loading}
+                                getAllPosts={getAllPosts}
+                            />
+                        }
+                        exact
+                    />
+                    <Route path="/activate/:token" element={<Activate />} exact />
+                </Route>
+                <Route element={<NotLoggedInRoutes />}>
+                    <Route path="/login" element={<Login />} exact />
+                </Route>
+                <Route path="/reset" element={<Reset />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;

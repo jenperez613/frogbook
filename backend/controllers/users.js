@@ -1,13 +1,15 @@
 import cloudinary from 'cloudinary'
 import mongoose from 'mongoose'
 import User from '../models/User.js'
+import Post from '../models/Post.js'
+import Code from '../models/Code.js'
 import {validateEmail, validateLength, validateUserName} from "../helpers/validation.js";
 import bcrypt from 'bcryptjs';
 import {generateToken} from "../helpers/tokens.js";
 import {sendVerificationEmail, sendResetCode} from "../helpers/mailer.js";
+import generateCode from '../helpers/generateCode.js'
 import jwt from "jsonwebtoken";
 
-import generateCode from '../helpers/generateCode.js'
 
 
 
@@ -23,11 +25,11 @@ export const register = async (req, res) => {
                         bMonth,
                         bDay,
                         gender,
-                } = req.body;
+                } = req.body
 
                 if (!validateEmail(email)) {
                         return res.status(400).json({
-                                message: "invalid email address",
+                                message: "Invalid email address.",
                         });
                 }
                 const check = await User.findOne({ email });
@@ -40,17 +42,17 @@ export const register = async (req, res) => {
 
                 if (!validateLength(first_name, 2, 30)) {
                         return res.status(400).json({
-                                message: "first name must between 2 and 30 characters.",
+                                message: "First name must between 2 and 30 characters.",
                         });
                 }
                 if (!validateLength(last_name, 2, 30)) {
                         return res.status(400).json({
-                                message: "last name must between 2 and 30 characters.",
+                                message: "Last name must between 2 and 30 characters.",
                         });
                 }
                 if (!validateLength(password, 6, 40)) {
                         return res.status(400).json({
-                                message: "password must be between 6 and 40 characters.",
+                                message: "Password must be between 6 and 40 characters.",
                         });
                 }
 
@@ -58,6 +60,7 @@ export const register = async (req, res) => {
 
                 let tempUserName = first_name + last_name;
                 let newUserName = await validateUserName(tempUserName);
+
                 const user = await new User({
                         first_name,
                         last_name,

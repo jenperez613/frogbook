@@ -23,13 +23,13 @@ export default function Footer() {
             <div className="login_footer_wrap">
                 <Link to="/">Sign Up</Link>
                 <Link to="/">Log in</Link>
-                <Link to="/">Messenger</Link>
-                <Link to="/">Facebook Lite</Link>
+                <Link to="/">Chat</Link>
+                <Link to="/">frogBook Lite</Link>
                 <Link to="/">Watch</Link>
                 <Link to="/">Places</Link>
                 <Link to="/">Games</Link>
                 <Link to="/">Marketplace</Link>
-                <Link to="/">Facebook Pay</Link>
+                <Link to="/">Frog Pay</Link>
                 <Link to="/">Oculus</Link>
                 <Link to="/">Portal</Link>
                 <Link to="/">Instagram</Link>
@@ -37,7 +37,7 @@ export default function Footer() {
                 <Link to="/">Local</Link>
                 <Link to="/">Fundraisers</Link>
                 <Link to="/">Services</Link>
-                <Link to="/">Voting Information Centre</Link>
+                <Link to="/">Voting Information Center</Link>
                 <Link to="/">Groups</Link>
                 <Link to="/">About</Link>
                 <Link to="/">Create ad</Link>
@@ -55,7 +55,7 @@ export default function Footer() {
             </div>
             <div className="login_footer_wrap">
                 <Link to="/" style={{ fontSize: "12px", marginTop: "10px" }}>
-                    Meta © 2022
+                   frogBook © 2022
                 </Link>
             </div>
         </footer>

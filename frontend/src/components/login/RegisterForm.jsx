@@ -15,7 +15,9 @@ import { useNavigate } from "react-router-dom";
 const RegisterForm = ({ setVisible }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const userInfos = {
+
+
+    const userInfo = {
         first_name: "",
         last_name: "",
         email: "",
@@ -25,7 +27,7 @@ const RegisterForm = ({ setVisible }) => {
         bDay: new Date().getDate(),
         gender: "",
     };
-    const [user, setUser] = useState(userInfos);
+    const [user, setUser] = useState(userInfo);
     const {
         first_name,
         last_name,
@@ -36,7 +38,9 @@ const RegisterForm = ({ setVisible }) => {
         bDay,
         gender,
     } = user;
+
     const yearTemp = new Date().getFullYear();
+
     const handleRegisterChange = (e) => {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
@@ -47,6 +51,7 @@ const RegisterForm = ({ setVisible }) => {
         return new Date(bYear, bMonth, 0).getDate();
     };
     const days = Array.from(new Array(getDays()), (val, index) => 1 + index);
+
     const registerValidation = Yup.object({
         first_name: Yup.string()
             .required("What's your First name ?")
@@ -65,7 +70,7 @@ const RegisterForm = ({ setVisible }) => {
             .email("Enter a valid email address."),
         password: Yup.string()
             .required(
-                "Enter a combination of at least six numbers,letters and punctuation marks(such as ! and &)."
+                "Enter a combination of at least six numbers,letters, and special characters (such as ! or &)."
             )
             .min(6, "Password must be at least 6 characters.")
             .max(36, "Password can't be more than 36 characters"),
@@ -95,6 +100,7 @@ const RegisterForm = ({ setVisible }) => {
             setError("");
             setSuccess(data.message);
             const { message, ...rest } = data;
+
             setTimeout(() => {
                 dispatch({ type: "LOGIN", payload: rest });
                 Cookies.set("user", JSON.stringify(rest));
@@ -110,7 +116,7 @@ const RegisterForm = ({ setVisible }) => {
         <div className="blur">
             <div className="register">
                 <div className="register_header">
-                    <i className="exit_icon" onClick={() => setVisible(false)}> </i>
+                    <i className="exit_icon" onClick={() => setVisible(false)}/>
                     <span>Sign Up</span>
                     <span>it's quick and easy</span>
                 </div>
@@ -171,7 +177,7 @@ const RegisterForm = ({ setVisible }) => {
                             <div className="reg_line">
                                 <RegisterInput
                                     type="text"
-                                    placeholder="Mobile number or email address"
+                                    placeholder="Email address"
                                     name="email"
                                     onChange={handleRegisterChange}
                                 />
@@ -211,7 +217,7 @@ const RegisterForm = ({ setVisible }) => {
                             </div>
                             <div className="reg_infos">
                                 By clicking Sign Up, you agree to our{" "}
-                                <span>Terms, Data Policy &nbsp;</span>
+                                <span>Terms, Data Policy, &nbsp;</span>
                                 and <span>Cookie Policy.</span> You may receive SMS
                                 notifications from us and can opt out at any time.
                             </div>
